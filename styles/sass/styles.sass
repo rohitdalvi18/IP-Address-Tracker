@@ -1,0 +1,205 @@
+// STYLEGUIDE
+$col-neutral-medium: hsl(0, 0%, 59%)
+$col-neutral-dark: hsl(0, 0%, 17%)
+
+$font-base-size: 18px
+$font-stack: 'Rubik', sans-serif
+$font-weight-light: 400
+$font-weight-regular: 500
+$font-weight-bold: 700
+
+$pg-margin: 24px
+$results-margin-top-sml: 166px
+$results-margin-top-lrg: 200px
+
+/*
+ * BASE LAYOUT
+ */
+*
+  box-sizing: border-box
+  // transition: all 0.2s ease-in-out
+html,
+body
+  margin: 0
+  height: 100%
+  width: 100%
+body
+  font-family: $font-stack
+  font-weight: $font-weight-regular
+  font-size: $font-base-size
+  color: $col-neutral-dark
+  position: relative
+  text-align: center
+h1, h2, h3, h4, h5, h6
+  font-weight: $font-weight-regular
+h1
+  font-size: 1.42em
+  margin-top: 2px
+  margin-bottom: 28px
+  color: white
+h3
+  color: $col-neutral-medium
+  font-size: 0.55em
+  letter-spacing: 1px
+  font-weight: $font-weight-bold
+  text-transform: uppercase
+  margin-top: 0
+  margin-bottom: 9px
+button
+  border-radius: 15px
+  padding: 20px $pg-margin
+  border: none
+  background: black
+button:focus
+  transform: scale(1.1)
+button:hover
+  background: lighten(#000000, 20%)
+  cursor: pointer
+input:focus,
+button:focus
+  outline: none
+  -moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.5)
+  -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.5)
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5)
+.visually-hidden
+  position: absolute
+  left: -10000px
+  top: auto
+  width: 1px
+  height: 1px
+  overflow: hidden
+.wrapper
+  display: flex
+  flex-direction: column
+  width: 100%
+  height: 100%
+  overflow: hidden
+.map
+  flex-grow: 1
+#mapid
+  min-height: 300px
+  height: 100%
+.leaflet-control-container .leaflet-top.leaflet-left
+  display: none
+
+@keyframes shake
+  0%
+    margin-left: 0rem
+  25%
+    margin-left: 0.5rem
+  75%
+    margin-left: -0.5rem
+  100%
+    margin-left: 0rem
+
+
+// HEADER + SEARCH BAR
+header
+  background: url("../../images/pattern-bg.png") no-repeat
+  background-size: cover
+  background-position: center center
+  padding: $pg-margin
+  padding-bottom: $results-margin-top-sml
+#search-bar
+  position: relative
+#search-bar input
+  width: 100%
+  border: none
+  font-size: 1em
+  color: $col-neutral-dark
+  padding: 18px $pg-margin
+  border-radius: 15px
+  &.error
+    animation: shake 0.2s ease-in-out 0s 2
+    border: 2px solid red
+    padding-top: 16px
+    padding-bottom: 16px
+#search-bar button
+  position: absolute
+  top: 0
+  right: 0
+  border-top-left-radius: 0
+  border-bottom-left-radius: 0
+
+// RESULTS
+.results
+  max-width: 1110px
+  position: absolute
+  top: $results-margin-top-sml
+  z-index: 1000
+  background: white
+  margin: 0 $pg-margin
+  border-radius: 15px
+  padding: 28px 20px
+  width: calc(100% - (2 * #{$pg-margin}))
+  box-shadow: 0px 20px 30px rgba(0,0,0,0.1)
+.results ul
+  list-style-type: none
+  padding-left: 0
+  margin: 0
+.results p
+  font-size: 1em
+  margin-top: 0
+  margin-bottom: 25px
+.results ul li:last-of-type p
+  margin-bottom: 0
+
+
+/*
+ * MEDIA QUERIES - Responsive layout changes
+ */
+@media screen and (min-width: 800px)
+  h1
+    font-size: 1.3em
+    margin-top: 5px
+  header
+    padding-bottom: calc(#{$results-margin-top-sml} - 70px)
+  #search-bar
+    margin: 0 auto
+    max-width: 555px
+  .results
+    left: 0
+  .results ul
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    position: relative
+    grid-gap: 20px
+  .results p
+    margin-bottom: 0
+  .results
+    text-align: left
+  .results ul li:not(:first-of-type):before
+    height: 100%
+    width: 1px
+    content: ""
+    border-left: 1px solid #d9d9d9
+    position: absolute
+  .results ul li:nth-of-type(2)
+    padding-left: 12px
+  .results ul li:nth-of-type(2):before
+    margin-left: -34px
+  .results ul li:nth-of-type(3)
+    padding-left: 22px
+  .results ul li:nth-of-type(3):before
+    margin-left: -32px
+  .results ul li:nth-of-type(4)
+    padding-left: 32px
+  .results ul li:nth-of-type(4):before
+    margin-left: -32px
+
+
+@media screen and (min-width: 1150px)
+  body
+    font-size: 1.5em
+  header
+    padding-bottom: calc(#{$results-margin-top-sml} - 40px)
+  h3
+    margin-bottom: 15px
+  #search-bar input
+    font-size: 0.75em
+  .results
+    left: calc(50% - (1110px / 2) - 24px)
+    top: $results-margin-top-lrg
+    padding: 35px 31px
+  .results p
+    line-height: 1.3
